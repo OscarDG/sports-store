@@ -7,7 +7,7 @@ export default function Hero(){
             <div className="flex justify-center w-[20%] h-auto text-center">
                 <h1 className="text-mainwhite text-[2rem] md:text-[3rem] font-bold ">EXPLORE</h1>
             </div>
-            <div className="absolute bottom-[10%] flex justify-center items-center rounded-[30px] bg-mainred w-[40%] md:w-[15%] h-[8%] md:h-[7%] text-mainwhite">
+            <div className="absolute bottom-[10%] flex justify-center items-center rounded-[30px] bg-mainred w-[40%] md:w-[15%] h-[8%] md:h-[7%] text-mainwhite transition duration-50 ease-in hover:scale-110 hover:bg-transparent hover:border-1 hover:border-mainred hover:text-mainred">
                 <Link href={'/store'}>Watch Products</Link>
             </div>
         </section>
