@@ -4,6 +4,7 @@ import Providers from '@/app/providers'
 import Features from "./ui/Features";
 import Header from "./ui/Header";
 import Hero from "./ui/Hero";
+import Collection from './ui/Collection';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
           <Header />
           <Hero />
           <Features />
+          <Collection />
         </Providers>
     </>
   );
