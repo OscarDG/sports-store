@@ -41,9 +41,11 @@ export default function FeaturesCart(){
                         </div>
                         <h2 className={`${monaSans.className} absolute md:top-[55%] top-[50%] left-10 text-[clamp(1.5rem,2rem,2.5rem)] after:content-[''] after:block after:w-[100%] after:h-[2px] after:bg-mainred after:rounded-2xl`}>{feature.name}</h2>
                         <p className={`${monaSans.className} absolute top-[65%] md:top-[68%] left-10 text-[clamp(0.5rem,1rem,1.5rem)] w-[70%]`}>{feature.description}</p>
-                        <a href="/" target="_blank" className="absolute bottom-5 left-10 flex justify-evenly items-center md:w-[40%] w-[40%] h-[12%] md:h-[8%] z-20 bg-mainred drop-shadow-lg hover:drop-shadow-0 hover:translate-y-[2%]">
+                        <a href="/" target="_blank" className="absolute bottom-5 left-10 flex justify-evenly items-center md:w-[40%] w-[40%] h-[12%] md:h-[8%] z-20 bg-mainred drop-shadow-lg">
                             <span className="flex items-center w-[50%] h-[100%] md:h-[100%] z-10 text-[clamp(1.5rem, 1.5rem + 0.5vw, 2rem)] text-mainwhite" >See more</span>
-                            <ArrowIcon width={50} height={50} stroke={'#ffffff'}/>
+                            <span className="w-[40px] transition duration-200 ease-linear hover:translate-x-2 ">
+                                <ArrowIcon width={40} height={40} stroke={'#ffffff'}/>
+                            </span> 
                         </a>
                     </div>
                 )
