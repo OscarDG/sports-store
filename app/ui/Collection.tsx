@@ -40,7 +40,7 @@ export default function Collection (){
                     })
                 }
             </div>
-            <div className="relative flex flex-row w-[100%] h-[250px] bg-[url(@/public/sports.webp)] bg-center bg-no-repeat bg-cover">
+            <div className="relative flex flex-row w-[100%] h-[250px] bg-[url(/sports.webp)] bg-center bg-no-repeat bg-cover">
 
             </div>
         </section>
