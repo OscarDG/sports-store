@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client/extension';
 
 const prisma = new PrismaClient();
 
@@ -25,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             });
 
             return res.status(200).json({ message: "Subscription successful!" });
-        }catch(error) {
+        }catch(_error) {
             return res.status(500).json({ error: "Internal Server Error" });
         }
     }
