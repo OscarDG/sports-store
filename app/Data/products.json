@@ -1,0 +1,114 @@
+[
+    {
+    "name": "name 1",
+    "category": "category 1",
+    "price": 71,
+    "available": false,
+    "id": "1",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 2",
+    "category": "category 2",
+    "price": 66,
+    "available": false,
+    "id": "2",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 3",
+    "category": "category 3",
+    "price": 18,
+    "available": false,
+    "id": "3",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 4",
+    "category": "category 4",
+    "price": 37,
+    "available": false,
+    "id": "4",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 5",
+    "category": "category 1",
+    "price": 65,
+    "available": false,
+    "id": "5",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 6",
+    "category": "category 2",
+    "price": 9,
+    "available": false,
+    "id": "6",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 7",
+    "category": "category 3",
+    "price": 25,
+    "available": false,
+    "id": "7",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 8",
+    "category": "category 4",
+    "price": 37,
+    "available": false,
+    "id": "8",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 9",
+    "category": "category 1",
+    "price": 25,
+    "available": false,
+    "id": "9",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 10",
+    "category": "category 2",
+    "price": 28,
+    "available": false,
+    "id": "10",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 11",
+    "category": "category 3",
+    "price": 70,
+    "available": false,
+    "id": "11",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 12",
+    "category": "category 4",
+    "price": 87,
+    "available": false,
+    "id": "12",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 13",
+    "category": "category 1",
+    "price": 69,
+    "available": false,
+    "id": "13",
+    "thumb": "/public/fabric.webp"
+    },
+    {
+    "name": "name 14",
+    "category": "category 2",
+    "price": 14,
+    "available": false,
+    "id": "14",
+    "thumb": "/public/fabric.webp"
+    }
+    ]

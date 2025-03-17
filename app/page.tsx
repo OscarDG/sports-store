@@ -1,11 +1,8 @@
-'use client';
-
 import Providers from '@/app/providers'
-import Features from "./ui/Features";
-import Header from "./ui/Header";
-import Hero from "./ui/Hero";
-import Collection from './ui/Collection';
-import Footer from './ui/Footer';
+import Features from "@/app/ui/Features";
+import Header from "@/app/ui/Header";
+import Hero from "@/app/ui/Hero";
+import Collection from '@/app/ui/Collection';
 
 export default function Home() {
   return (
@@ -15,7 +12,6 @@ export default function Home() {
           <Hero />
           <Features />
           <Collection />
-          <Footer />
         </Providers>
     </>
   );

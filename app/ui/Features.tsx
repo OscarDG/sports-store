@@ -1,3 +1,5 @@
+'use client';
+
 import FeaturesCart from "./FeaturesCart";
 import FabricIcon from "@/public/fabric";
 import RecycleIcon from "@/public/recycling";

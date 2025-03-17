@@ -1,8 +1,9 @@
-import CollectCart from "./CollectionCarts";
-import { monaSans } from "../fonts";
+'use client';
+
+import CollectCart from "@/app/ui/CollectionCarts";
+import { monaSans } from "@/app/fonts";
 
 export default function Collection (){
-
     
     const collections = [
         {

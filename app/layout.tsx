@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {monaSans} from '@/app/fonts'
+import Footer from "./ui/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function RootLayout({
         className={`${monaSans.variable} antialiased`}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );
