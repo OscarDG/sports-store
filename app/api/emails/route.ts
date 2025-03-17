@@ -25,7 +25,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             });
 
             return res.status(200).json({ message: "Subscription successful!" });
-        }catch(_error) {
+        }catch(error) {
+            console.error("Error processing subscription: ", error)
             return res.status(500).json({ error: "Internal Server Error" });
         }
     }
