@@ -1,3 +1,4 @@
+'use client';
 import { monaSans } from "../fonts"
 import Newsletter from "./Newsletter"
 import TiktokIcon from "@/public/tiktok"
