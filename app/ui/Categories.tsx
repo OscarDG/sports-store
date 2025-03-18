@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Products } from "../types"
 import Image from "next/image";
+import clothes from '@/public/clothes.svg'
+import gadget from '@/public/gadget.svg'
+import sports from '@/public/sports.svg'
+import clsx from "clsx";
 
 type categoriesProducts = {
-    products: Products[]
+    products: Products[],
 }
 
 export default function Categories({products}:categoriesProducts){
@@ -16,16 +21,30 @@ export default function Categories({products}:categoriesProducts){
             seenCategories.add(product.category)
         }
     }
+
+    const [active, setActive] = useState<{[key: string]: boolean}>({})
+
+    const handleToggle = (category: string) => {
+        setActive((prev) => ({
+            ...prev,
+            [category]: !prev[category]
+        }));
+    }
     
     return (
-        <div className="absolute bottom-0 left-3 md:left-10 flex flex-row justify-evenly items-center w-[95%] h-[25%] md:h-[40%]">
+        <div className="absolute bottom-5 left-3 md:left-7 flex flex-row justify-evenly md:justify-center items-center md:gap-5 w-[95%] md:w-[40%] h-[25%] md:h-[40%]">
             {
                 uniqueProduct.map((product) => {
+
+                    const isActive = active[product.category] || false;
+
                     return (
-                        <div key={product.id} className="flex flex-col justify-center items-center w-[10%] h-auto">
+                        <button onClick={() => handleToggle(product.category)} key={product.id} className={clsx(`flex flex-col justify-center items-center w-[18%] md:w-[13%] h-auto p-[10px] cursor-pointer rounded-2xl bg-gray-200/50`, isActive? 'bg-maingreen/30': 'bg-none')}>
                             <h3>{product.category}</h3>
-                            <Image className='w-[20px] h-[20px]' src={product.thumb} alt="Category thumb" width={10} height={10}/>
-                        </div>
+                            {
+                                product.category === 'clothes'? <Image src={clothes} alt="clothes category" width={25} height={25}/> : product.category === 'gadgets'? <Image src={gadget} alt="clothes category" width={25} height={25}/> : product.category === 'sports'? <Image src={sports} alt="clothes category" width={25} height={25}/> : null
+                            }
+                        </button>
                     )
             })
         }

@@ -32,7 +32,7 @@ export default function StoreHeader({products}:headerProducts){
     }, [])
 
     return (
-        <header className={clsx(`${monaSans.className} fixed flex md:flex-row flex-col items-center w-[100%] h-[28%] md:h-[25%] pt-5 z-20 border-b-1`, sticky? `bg-mainwhite`: `bg-transparent`)}>
+        <header className={clsx(`${monaSans.className} fixed flex md:flex-row flex-col items-center w-[100%] h-[35%] md:h-[30%] pt-5 z-20 border-b-1`, sticky? `bg-mainwhite`: `bg-transparent`)}>
             <nav className="md:absolute md:right-[2%] md:top-[20%] flex flex-row justify-around md:justify-evenly items-center w-[100%] md:w-[20%] mb-[25%] md:mb-0">
                 <div className="group flex flex-row justify-evenly items-center w-[29%] md:w-[120px] h-[85%] md:h-[40px] rounded-2xl pr-2 pl-2 bg-mainred text-mainwhite cursor-pointer">
                     <span className="w-[20px] h-[20px] rotate-180 transition duration-200 ease-linear group-hover:-translate-x-1"><ArrowIcon width={'100%'} height={'100%'} stroke={'#ffffff'}/></span>
@@ -44,7 +44,7 @@ export default function StoreHeader({products}:headerProducts){
                 </div>
             </nav>
             <SearchBar />
-            <span className="absolute bottom-15 w-[80%] md:w-0 h-[1px] md:h-0 bg-gray-300"></span>
+            <span className="absolute bottom-28 w-[80%] md:w-0 h-[1px] md:h-0 bg-gray-300"></span>
             <Categories products= {products}/>
         </header>
     )
