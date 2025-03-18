@@ -1,15 +1,15 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client/extension';
+import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse){
-    if(req.method === 'POST'){
+export async function POST(req: Request){
         try{
-            const { email } = req.body;
+            const { email } = await req.json();
 
             if(!email || typeof email !== "string"){
-                return res.status(400).json({ error: "Valid email is required" });
+                return new Response(
+                    JSON.stringify({ error: 'Valid email is required' }), { status: 400, headers: { 'Content-Type': 'application/json' }}
+                );
             }
 
             const existingSubscriber = await prisma.subscriber.findUnique({
@@ -17,20 +17,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             });
 
             if(existingSubscriber){
-                return res.status(409).json({ message: "Email already subscribed" });
+                return new Response(
+                    JSON.stringify({ message: 'Email already subscribed' }), { status: 409, headers: { 'Content-Type': 'application/json' }}
+                );
             }
 
             await prisma.subscriber.create({
                 data: {email},
             });
 
-            return res.status(200).json({ message: "Subscription successful!" });
-        }catch(error) {
+            return new Response(
+                JSON.stringify({message: 'Subscription successful!'}), { status: 200, headers: { 'Content-Type': 'application/json' }}
+            );
+
+        } catch(error) {
             console.error("Error processing subscription: ", error)
-            return res.status(500).json({ error: "Internal Server Error" });
+            return new Response(
+                JSON.stringify({error: 'Internal Server Error'}),{ status: 500, headers: { 'Content-Type': 'application/json' }}
+            );
         }
     }
 
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-}
+    export async function GET(){
+        return new Response(
+            JSON.stringify({error: 'Method not allowed'}),
+            { status: 405, headers: { 'Content-Type': 'application/json' } }
+        )
+    }

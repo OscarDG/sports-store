@@ -10,15 +10,31 @@ export default function Newsletter(){
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const response = await fetch("api/emails/route", {
-            method: "POST",
-            headers: {"Content-Type": "application/json" },
-            body: JSON.stringify({ email })
-        });
+    
+        try{
 
-        const data = await response.json();
+            const response = await fetch("/api/emails", {
+                method: "POST",
+                headers: {"Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+            });
+
+
+        const contentType = response.headers.get("content-type");
+        let data;
+
+        if (contentType && contentType.includes("application/json")){
+            data = await response.json();
+        }else{
+            data = {error: "Invalid response from server"};
+        }
+
         setMessage(data.message || data.error);
-        if(response.ok) setEmail("");
+        if (response.ok) setEmail('');
+        }catch(error){
+            console.error("Error: ", error);
+            setMessage("Something went wrong, please try again.")
+        }
     };
 
     return(
