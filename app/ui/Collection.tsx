@@ -1,5 +1,4 @@
 'use client';
-
 import CollectCart from "@/app/ui/CollectionCarts";
 import { monaSans } from "@/app/fonts";
 

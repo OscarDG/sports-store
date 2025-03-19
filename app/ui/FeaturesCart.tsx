@@ -1,5 +1,4 @@
 'use-client';
-
 import Image from "next/image";
 import FeatureImageOne from '@/public/adventure.webp'
 import FeatureImageTwo from '@/public/health.webp'

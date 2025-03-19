@@ -4,6 +4,11 @@ export async function GET() {
    try{
     const products = await prisma.product.findMany();
 
+    const formattedProducts = products.map(product => ({
+        ...product,
+        available: product.available ?? true
+    }));
+
     return new Response(
         JSON.stringify(products),
         {status: 200, headers: { "Content-Type": "application/json" }}

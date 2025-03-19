@@ -42,7 +42,7 @@ export default function Categories({products}:categoriesProducts){
                         <button onClick={() => handleToggle(product.category)} key={product.id} className={clsx(`flex flex-col justify-center items-center w-[18%] md:w-[13%] h-auto p-[10px] cursor-pointer rounded-2xl bg-gray-200/50`, isActive? 'bg-maingreen/30': 'bg-none')}>
                             <h3>{product.category}</h3>
                             {
-                                product.category === 'clothes'? <Image src={clothes} alt="clothes category" width={25} height={25}/> : product.category === 'gadgets'? <Image src={gadget} alt="clothes category" width={25} height={25}/> : product.category === 'sports'? <Image src={sports} alt="clothes category" width={25} height={25}/> : null
+                                product.category === 'Clothes'? <Image src={clothes} alt="clothes category" width={25} height={25}/> : product.category === 'Gadgets'? <Image src={gadget} alt="clothes category" width={25} height={25}/> : product.category === 'Sports'? <Image src={sports} alt="clothes category" width={25} height={25}/> : null
                             }
                         </button>
                     )

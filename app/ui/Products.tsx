@@ -1,46 +1,13 @@
-import { useEffect, useState } from "react"
+import { Products } from "../types";
 
-interface Product {
-    id: string,
-    name: string,
-    price: number,
-    category: string,
-    thumb: string
+type headerProducts = {
+    products: Products[]
 }
 
-export default function ProductsSect(){
-
-    const [products, setProducts] = useState<Product[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        async function fetchProducts() {
-            try{
-                const response = await fetch("/api/products");
-                if(!response.ok){
-                    throw new Error("Failed to fetch products");
-                }
-
-                const data: Product[] = await response.json();
-                setProducts(data);
-            }catch(error){
-                console.error(error)
-                setError(error instanceof Error? error.message : "Unknown error");
-            }finally{
-                setLoading(false);
-            }
-        }
-
-        fetchProducts();
-    }, [])
-
-    if(loading) return <p>Loading products...</p>
-    if(error) return <p>Error: {error}</p>
+export default function ProductsSect({products}:headerProducts){
 
     return (
-        <>
-        <div className="w-[100%] h-[100vh]">{products.length}</div>
+        <section className="relative flex flex-col w-[100%] h-[100vh]">
         <div>
             {products.map((product) => (
                 <div key={product.id}>
@@ -50,6 +17,6 @@ export default function ProductsSect(){
                 </div>
             ))}
         </div>
-        </>
+        </section>
     )
 }
