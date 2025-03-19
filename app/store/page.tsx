@@ -4,7 +4,7 @@ import StoreHeader from "@/app/ui/StoreHeader";
 import ProductsSect from "@/app/ui/Products";
 
 interface Product {
-    id: string,
+    id: number,
     name: string,
     price: number,
     category: string,

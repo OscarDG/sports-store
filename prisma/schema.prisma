@@ -19,7 +19,7 @@ model Subscriber {
 }
 
 model Product {
-  id String @id @default(uuid())
+  id Int @id
   name String
   price Float
   category String
