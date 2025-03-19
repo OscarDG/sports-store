@@ -1,5 +1,4 @@
 'use client';
-import { useState, useEffect } from "react"
 import SearchBar from "./SearchBar"
 import Categories from "./Categories";
 import BwButton from "@/app/ui/BwButton";
