@@ -10,7 +10,7 @@ export async function GET() {
     }));
 
     return new Response(
-        JSON.stringify(products),
+        JSON.stringify(formattedProducts),
         {status: 200, headers: { "Content-Type": "application/json" }}
     );
    }catch(error){
