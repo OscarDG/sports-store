@@ -17,3 +17,10 @@ model Subscriber {
   id String @id @default(uuid())
   email String @unique
 }
+
+model Product {
+  id String @id @default(uuid())
+  name String
+  price Float
+  category String
+}

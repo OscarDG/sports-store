@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Products } from "../types"
+import { Products } from "@/app/types"
 import Image from "next/image";
 import clothes from '@/public/clothes.svg'
 import gadget from '@/public/gadget.svg'

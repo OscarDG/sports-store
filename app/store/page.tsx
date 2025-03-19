@@ -1,6 +1,6 @@
 'use client';
-import StoreHeader from "../ui/StoreHeader";
-import ProductsSect from "../ui/Products";
+import StoreHeader from "@/app/ui/StoreHeader";
+import ProductsSect from "@/app/ui/Products";
 import products from '@/app/api/products.json'
 
 export default function Store(){
