@@ -1,12 +1,10 @@
 'use client';
 import { useState, useEffect } from "react"
-import Link from "next/link"
 import SearchBar from "./SearchBar"
 import Categories from "./Categories";
 import BwButton from "@/app/ui/BwButton";
 import { Products } from "../types";
 import { CartIcon } from "@/public/cart"
-import { ArrowIcon } from "@/public/arrow";
 import { monaSans } from "../fonts"
 import clsx from "clsx"
 
