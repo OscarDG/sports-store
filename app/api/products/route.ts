@@ -2,18 +2,20 @@ import {prisma} from '@/app/api/prisma'
 
 export async function GET() {
    try{
-    const products = await prisma.product.findMany();
+    const products = await prisma.product.findMany({
+        where: {available: true}
+    });
 
-    const formattedProducts = products.map(({id, name, price, category}) => ({
-        id,
-        name,
-        price,
-        category,
-        available: true
-    }));
+    // const formattedProducts = products.map(({id, name, price, category}) => ({
+    //     id,
+    //     name,
+    //     price,
+    //     category,
+    //     available: true
+    // }));
 
     return new Response(
-        JSON.stringify(formattedProducts),
+        JSON.stringify(products),
         {status: 200, headers: { "Content-Type": "application/json" }}
     );
    }catch(error){
