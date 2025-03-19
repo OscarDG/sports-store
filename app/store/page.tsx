@@ -39,13 +39,13 @@ export default function Store(){
             fetchProducts();
         }, [])
     
-        if(loading) return <p className="absolute flex justify-center items-center top-[50%] left-[40%] w-[15%] h-[10%] text-mainwhite bg-mainred/50 rounded-[100px]">Loading products...</p>
+        if(loading) return <p className="fixed inset-0 flex justify-center items-center top-[50%] left-[40%] w-[15%] h-[10%] text-mainwhite bg-mainred/50 rounded-[100px]">Loading products...</p>
         if(error) return <p>Error: {error}</p>
 
     return(
-        <>
+        <main className="flex flex-col min-h-screen gap-6 pt-[0%] md:pt-[0%]">
             <StoreHeader products={products}/>
             <ProductsSect products={products}/>
-        </>
+        </main>
     )
 }

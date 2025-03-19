@@ -14,35 +14,20 @@ type headerProducts = {
 
 export default function StoreHeader({products}:headerProducts){
 
-    const [sticky, setSticky] = useState(false)
-    
-        useEffect(() => {
-            const handleScroll = () => {
-            if(window.scrollY > 580){
-                setSticky(true)
-            }else{
-                setSticky(false)
-            };
-        }
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [])
-
     return (
-        <header className={clsx(`${monaSans.className} fixed flex md:flex-row flex-col items-center w-[100%] h-[35%] md:h-[30%] pt-5 z-20 border-b-1`, sticky? `bg-mainwhite`: `bg-transparent`)}>
-            <nav className="md:absolute md:right-[2%] md:top-[20%] flex flex-row justify-around md:justify-evenly items-center w-[100%] md:w-[20%] mb-[25%] md:mb-0">
-                <div className="flex w-[40%] h-[40px]">
-                    <BwButton width={50} height={30} href="/" target="_self" text="Go back"/>
+        <header className={clsx(`${monaSans.className} relative flex flex-col items-center w-[100%] h-[42vh] md:h-[25vh] pt-5 shadow-sm`)}>
+            <nav className="header_navbar flex flex-col md:flex-row md:justify-between items-center w-[95%] h-[35%] md:h-[50%] p-2">
+                <div className="header_buttons absolute top-7 md:bottom-2 md:right-15 flex flex-row items-center w-[80%] md:w-[20%] h-[25%] md:h-[30%]">
+                    <div className="absolute w-[40%] h-[80%]">
+                        <BwButton width={100} height={100} href="/" target="_self" text="Go back"/>
+                    </div>
+                    <div className="absolute right-0 flex flex-col justify-center items-center w-[20%] md:w-[18%] max-w-[75px] md:max-w-[70px] min-w-[40px] h-[90%] md:h-[90%] rounded-[100%] bg-mainred transition duration-200 ease-in hover:scale-105">
+                        <span className={clsx(products.length <= 0? `hidden`:`absolute flex justify-center items-center text-[0.6rem] text-mainwhite font-medium top-[-5px] right-[0px] w-[15px] h-[15px] rounded-[100%] bg-maingreen`)}>{products.length}</span>
+                        <button className='flex justify-center items-center w-[60px] md:w-[40px] h-[60px] md:h-[40px] cursor-pointer'><CartIcon width={'60%'} height={'60%'} stroke="#ffffff"/></button>
+                    </div>
                 </div>
-                <div className="relative flex justify-center items-center w-[60px] md:w-[40px] h-[60px] md:h-[40px] rounded-[100%] bg-mainred transition duration-100 ease-in hover:scale-110">
-                    <span className={clsx(products.length <= 0? `hidden`:`absolute flex justify-center items-center text-[0.6rem] text-mainwhite font-medium top-[-5px] right-[0px] w-[15px] h-[15px] rounded-[100%] bg-maingreen`)}>{products.length}</span>
-                    <button className='flex justify-center items-center w-[60px] md:w-[40px] h-[60px] md:h-[40px] cursor-pointer'><CartIcon width={'60%'} height={'60%'} stroke="#ffffff"/></button>
-                </div>
+                <SearchBar />
             </nav>
-            <SearchBar />
-            <span className="absolute bottom-28 w-[80%] md:w-0 h-[1px] md:h-0 bg-gray-300"></span>
             <Categories products= {products}/>
         </header>
     )

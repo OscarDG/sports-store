@@ -32,14 +32,14 @@ export default function Categories({products}:categoriesProducts){
     }
     
     return (
-        <div className="absolute bottom-5 left-3 md:left-7 flex flex-row justify-evenly md:justify-center items-center md:gap-5 w-[95%] md:w-[40%] h-[25%] md:h-[40%]">
+        <div className="absolute bottom-1 left-12 flex flex-flow w-[80%] md:w-[25%] h-[30%] md:h-[40%] gap-5 mt-5 mb-2 md:mb-2 justify-center">
             {
                 uniqueProduct.map((product) => {
 
                     const isActive = active[product.category] || false;
 
                     return (
-                        <button onClick={() => handleToggle(product.category)} key={product.id} className={clsx(`flex flex-col justify-center items-center w-[18%] md:w-[13%] h-auto p-[10px] cursor-pointer rounded-2xl bg-gray-200/50`, isActive? 'bg-maingreen/30': 'bg-none')}>
+                        <button onClick={() => handleToggle(product.category)} key={product.id} className={clsx(`flex flex-col justify-center items-center w-[30%] md:w-[25%] shrink-1 h-auto p-[10px] cursor-pointer rounded-2xl bg-gray-200/50`, isActive? 'bg-maingreen/30': 'bg-none')}>
                             <h3>{product.category}</h3>
                             {
                                 product.category === 'Clothes'? <Image src={clothes} alt="clothes category" width={25} height={25}/> : product.category === 'Gadgets'? <Image src={gadget} alt="clothes category" width={25} height={25}/> : product.category === 'Sports'? <Image src={sports} alt="clothes category" width={25} height={25}/> : null
