@@ -4,9 +4,12 @@ export async function GET() {
    try{
     const products = await prisma.product.findMany();
 
-    const formattedProducts = products.map(product => ({
-        ...product,
-        available: product.available ?? true
+    const formattedProducts = products.map(({id, name, price, category}) => ({
+        id,
+        name,
+        price,
+        category,
+        available: true
     }));
 
     return new Response(
