@@ -1,4 +1,4 @@
-import { useState, useId } from "react";
+import { useState } from "react";
 import {useFilter} from '@/app/hooks/useFilter'
 import { Products } from "@/app/types"
 import Image from "next/image";
@@ -25,7 +25,7 @@ export default function Categories({products}:categoriesProducts){
         }
     }
 
-    const {setFilters, filters} = useFilter()
+    const {setFilters } = useFilter()
 
     const [activeCategory, setActiveCategory] = useState<string | null>('all')
 
