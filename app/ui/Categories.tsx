@@ -10,7 +10,7 @@ import clsx from "clsx";
 
 type categoriesProducts = {
     products: Products[],
-    filter: string
+    filter?: string
 }
 
 export default function Categories({products}:categoriesProducts){
