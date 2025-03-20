@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from "react";
+import { FiltersProvider } from "../context/filterContext";
 import StoreHeader from "@/app/ui/StoreHeader";
 import ProductsSect from "@/app/ui/Products";
 
@@ -43,9 +44,11 @@ export default function Store(){
         if(error) return <p>Error: {error}</p>
 
     return(
+        <FiltersProvider>
         <main className="flex flex-col min-h-screen gap-6 pt-[0%] md:pt-[0%]">
             <StoreHeader products={products}/>
             <ProductsSect products={products}/>
         </main>
+        </FiltersProvider>
     )
 }
