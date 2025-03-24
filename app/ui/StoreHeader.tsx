@@ -4,7 +4,6 @@ import Categories from "./Categories";
 import BwButton from "@/app/ui/BwButton";
 import CartButton from "./CartButton";
 import { Products } from "../types";
-import { CartIcon } from "@/public/cart"
 import { monaSans } from "../fonts"
 import clsx from "clsx"
 
