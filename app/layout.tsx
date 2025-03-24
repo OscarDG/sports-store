@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import {monaSans} from '@/app/fonts'
-import Footer from "@/app/ui/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
