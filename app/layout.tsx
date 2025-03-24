@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import {monaSans} from '@/app/fonts'
-import Footer from "./ui/Footer";
+import Footer from "@/app/ui/Footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,17 +10,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+  children
+}:{
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
-        className={`${monaSans.variable} box-border antialiased`}
+        className={`${monaSans.variable} box-border`}
       >
         {children}
-        <Footer />
       </body>
     </html>
   );

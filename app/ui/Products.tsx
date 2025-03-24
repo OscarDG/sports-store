@@ -17,14 +17,14 @@ export default function ProductsSect({products}:headerProducts){
     const filteredProducts = filterProducts(initialProducts)
 
     return (
-        <section className="relative flex flex-col justify-center items-center w-[100%] h-[120vh] overscroll-contain">
-        <div className="flex md:flex-row flex-col justify-start md:justify-evenly items-center md:flex-wrap w-[95%] h-[100%] gap-5 pb-12 pt-5 overflow-y-auto scrollbarhide">
+        <section className="relative flex flex-col justify-center items-center w-[100%] h-auto overscroll-contain">
+        <div className="flex md:flex-row flex-col justify-start md:justify-evenly md:items-start items-center md:flex-wrap w-[95%] md:w-[80%] h-auto gap-5 pb-5 pt-10 overflow-y-auto scrollbarhide">
             {filteredProducts.map((product) => (
-                <div key={product.id} className={`group relative flex flex-col justify-evenly items-center w-[75%] max-w-[300px] md:w-[30%] md:max-w-[500px] h-[60%] max-h-[350px] md:h-[50%] md:max-h-[550px] min-h-[300px] rounded-2xl bg-gray-200 overflow-hidden cursor-pointer`}>
+                <div key={product.id} className={`group relative flex flex-col justify-evenly items-center w-[75%] max-w-[300px] md:w-[30%] md:max-w-[400px] min-w-[300px] md:min-w-[400px] h-[60%] max-h-[350px] md:h-[50%] md:max-h-[350px] min-h-[350px] md:min-h-[400px] rounded-2xl bg-gray-200 overflow-hidden cursor-pointer`}>
                     <div className="absolute bottom-2 right-15 md:right-10 w-[20%] h-[10%] z-10">
-                        <FwButton width={'50'} height={'100'} href="/" text='See more'/>
+                        <FwButton width={'50'} height={'100'} href={`store/products/`} text='See more'/>
                     </div>
-                    <Image src={`/${product.tag}.jpg`} alt={product.name} width={300} height={300} className="w-full h-full object-cover transition duration-150 group-hover:scale-120" />
+                    <Image src={`/${product.tag}.webp`} alt={product.name} width={400} height={500} className="w-[400px] h-[500px] object-cover transition duration-150 group-hover:scale-120" />
                     <div className="absolute top-0 left-0 hidden flex-col justify-center items-center w-full h-full bg-black/50 transition duration-150 group-hover:flex">
                         <p className="w-[90%] text-center text-mainwhite">{product.description}</p>
                     </div>

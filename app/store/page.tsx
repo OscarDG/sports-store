@@ -2,10 +2,10 @@
 import { FiltersProvider } from "../context/filterContext";
 import StoreHeader from "@/app/ui/StoreHeader";
 import ProductsSect from "@/app/ui/Products";
+import { ProductsSkeleton } from "@/app/ui/Skeletons";
 import { useState, useEffect } from "react";
 
 export default function Store(){
-
     interface Product {
         id: number,
         name: string,
@@ -45,14 +45,17 @@ export default function Store(){
         fetchProducts();
     }, [])
 
-    if(loading) return <p>Loading products</p>
+    if(loading) return (
+    <>
+        <ProductsSkeleton/>
+    </>
+)
     if(error) return error
+
     return(
         <FiltersProvider>
-        <main className="flex flex-col min-h-screen gap-6 pt-[0%] md:pt-[0%]">
             <StoreHeader products={products}/>
             <ProductsSect products={products}/>
-        </main>
         </FiltersProvider>
     )
 }
