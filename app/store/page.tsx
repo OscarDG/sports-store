@@ -9,6 +9,7 @@ export default function Store(){
     interface Product {
         id: number,
         name: string,
+        tag: string,
         price: number,
         category: string,
         thumb: string,

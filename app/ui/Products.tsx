@@ -24,7 +24,7 @@ export default function ProductsSect({products}:headerProducts){
                     <div className="absolute bottom-2 right-15 md:right-10 w-[20%] h-[10%] z-10">
                         <FwButton width={'50'} height={'100'} href="/" text='Buy Now'/>
                     </div>
-                    <Image src={`/${product.name}.jpg`} alt={product.name} width={300} height={300} className="w-full h-full object-cover transition duration-150 group-hover:scale-120" />
+                    <Image src={`/${product.tag}.jpg`} alt={product.name} width={300} height={300} className="w-full h-full object-cover transition duration-150 group-hover:scale-120" />
                     <div className="absolute bottom-0 left-0 pl-3 flex flex-col justify-evenly bg-black w-full h-[80px] mask-faded-top"></div>
                     <h2 className="absolute bottom-8 left-3 flex justify-start items-center w-auto h-[20px] text-center text-mainwhite">{product.name}</h2>
                     <p className=" absolute bottom-2 left-3 w-[20%] min-w-[65px] h-[20px] text-mainwhite">$ {product.price}</p>
