@@ -8,6 +8,21 @@
   --color-maingreen: #98E990;
 }
 
+@layer utilities{
+  ::-webkit-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  ::-webkit-scrollbar-track{
+    border-radius: 100vh;
+    background: var(--color-maingreen);
+  }
+}
+
+@utility mask-faded-top{
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 80%);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #ededed;
