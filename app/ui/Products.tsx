@@ -2,6 +2,7 @@
 import { Products } from "../types";
 import { useState } from "react";
 import { useFilter } from "../hooks/useFilter";
+import FwButton from "@/app/ui/FwButton";
 import Image from "next/image";
 import clsx from "clsx";
 
@@ -17,9 +18,12 @@ export default function ProductsSect({products}:headerProducts){
 
     return (
         <section className="relative flex flex-col justify-center items-center w-[100%] h-[120vh] overscroll-contain">
-        <div className="flex md:flex-row flex-col justify-baseline md:justify-evenly items-center md:items-baseline md:flex-wrap w-[95%] h-[100%] gap-5 pb-12 pt-5 overflow-y-auto scrollbarhide">
+        <div className="flex md:flex-row flex-col justify-start md:justify-evenly items-center md:flex-wrap w-[95%] h-[100%] gap-5 pb-12 pt-5 overflow-y-auto scrollbarhide">
             {filteredProducts.map((product) => (
-                <div key={product.id} className="group relative flex flex-col justify-evenly items-center w-[75%] max-w-[300px] md:w-[30%] md:max-w-[500px] h-[60%] max-h-[350px] md:h-[50%] md:max-h-[550px] min-h-[300px] rounded-2xl bg-gray-200 overflow-hidden cursor-pointer">
+                <div key={product.id} className={`group relative flex flex-col justify-evenly items-center w-[75%] max-w-[300px] md:w-[30%] md:max-w-[500px] h-[60%] max-h-[350px] md:h-[50%] md:max-h-[550px] min-h-[300px] rounded-2xl bg-gray-200 overflow-hidden cursor-pointer`}>
+                    <div className="absolute bottom-2 right-15 md:right-10 w-[20%] h-[10%] z-10">
+                        <FwButton width={'50'} height={'100'} href="/" text='Buy Now'/>
+                    </div>
                     <Image src={`/${product.name}.jpg`} alt={product.name} width={300} height={300} className="w-full h-full object-cover transition duration-150 group-hover:scale-120" />
                     <div className="absolute bottom-0 left-0 pl-3 flex flex-col justify-evenly bg-black w-full h-[80px] mask-faded-top"></div>
                     <h2 className="absolute bottom-8 left-3 flex justify-start items-center w-auto h-[20px] text-center text-mainwhite">{product.name}</h2>

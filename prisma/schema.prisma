@@ -21,6 +21,7 @@ model Subscriber {
 model Product {
   id Int @id
   name String
+  tag String @default("default_tag")
   price Float
   category String
   available Boolean @default(true)
