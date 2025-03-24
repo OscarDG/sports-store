@@ -14,6 +14,7 @@ export default function Store(){
         category: string,
         thumb: string,
         available: boolean
+        description: string
     }
     
     const [products, setProducts] = useState<Product[]>([]);
@@ -29,7 +30,10 @@ export default function Store(){
                 }
     
                 const data: Product[] = await response.json();
-                setProducts(data);
+
+                const avalableProducts = data.filter((product) => product.available === true)
+
+                setProducts(avalableProducts);
             }catch(error){
                 console.error(error)
                 setError(error instanceof Error? error.message : "Unknown error");

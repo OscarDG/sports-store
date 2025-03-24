@@ -6,5 +6,6 @@ export type Products = {
     price: number,
     category: string,
     available: boolean,
-    thumb: string
+    thumb: string,
+    description: string
 }

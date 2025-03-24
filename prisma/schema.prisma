@@ -25,4 +25,5 @@ model Product {
   price Float
   category String
   available Boolean @default(true)
+  description String @default("default description")
 }
