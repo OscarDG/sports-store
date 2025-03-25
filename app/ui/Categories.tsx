@@ -42,17 +42,17 @@ export default function Categories({products}:categoriesProducts){
     }
     
     return (
-        <div className="absolute bottom-1 left-12 flex flex-flow w-[80%] md:w-[30%] h-[30%] md:h-[40%] gap-5 mt-5 mb-2 md:mb-2 justify-center items-center">
-                <button onClick={() => handleToggle('All')} key={0} value='All' className={clsx(`flex flex-col justify-center items-center w-[20%] md:w-[25%] h-[75%] md:h-auto p-[10px] cursor-pointer rounded-2xl`, activeCategory === 'all'? 'bg-maingreen/30': `bg-none`)}>
-                    <h3>All</h3>
+        <div className="absolute bottom-1 left-12 flex flex-flow w-[80%] md:w-[30%] h-[30%] md:h-[45%] gap-5 mb-2 md:mb-1 justify-center items-center">
+                <button onClick={() => handleToggle('All')} key={0} value='All' className={clsx(`flex flex-col justify-center items-center w-[20%] md:w-[25%] h-[80%] md:h-[100%] p-2 cursor-pointer rounded-2xl`, activeCategory === 'all'? 'bg-maingreen/30': `bg-none`)}>
+                    <p className="text-[.8rem] md:text-[1rem]">All</p>
                     <Image src={allItems} alt="All category" width={25} height={25}/>
                 </button>
             {
                 uniqueProduct.map((product) => {
 
                     return (
-                        <button onClick={() => handleToggle(product.category)} key={product.id} type='button' value={product.category} className={clsx(`flex flex-col justify-center items-center w-[20%] md:w-[25%] h-[75%] md:h-auto p-[10px] cursor-pointer rounded-2xl bg-gray-200/50`, activeCategory === product.category? 'bg-maingreen/30': 'bg-none')}>
-                            <h3>{product.category}</h3>
+                        <button onClick={() => handleToggle(product.category)} key={product.id} type='button' value={product.category} className={clsx(`flex flex-col justify-center items-center w-[20%] md:w-[25%] h-[80%] md:h-[100%] p-2 cursor-pointer rounded-2xl bg-gray-200/50`, activeCategory === product.category? 'bg-maingreen/30': 'bg-none')}>
+                            <p className="text-[.8rem] md:text-[1rem]">{product.category}</p>
                             {
                                 product.category === 'Clothes'? <Image src={clothes} alt="clothes category" width={25} height={25}/> : product.category === 'Gadgets'? <Image src={gadget} alt="clothes category" width={25} height={25}/> : product.category === 'Sports'? <Image src={sports} alt="clothes category" width={25} height={25}/> : null
                             }

@@ -47,7 +47,7 @@ export default function Store(){
 
     if(loading) return (
     <>
-        <ProductsSkeleton/>
+        <ProductsSkeleton />
     </>
 )
     if(error) return error
