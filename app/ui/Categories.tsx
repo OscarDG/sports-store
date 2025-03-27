@@ -43,7 +43,7 @@ export default function Categories({products}:categoriesProducts){
     
     return (
         <div className="absolute bottom-1 left-12 flex flex-flow w-[80%] md:w-[30%] h-[30%] md:h-[45%] gap-5 mb-2 md:mb-1 justify-center items-center">
-                <button onClick={() => handleToggle('All')} key={0} value='All' className={clsx(`flex flex-col justify-center items-center w-[20%] md:w-[25%] h-[80%] md:h-[100%] p-2 cursor-pointer rounded-2xl`, activeCategory === 'All'? 'bg-maingreen/30': `bg-none`)}>
+                <button onClick={() => handleToggle('All')} key={0} value='All' className={clsx(`flex flex-col justify-center items-center w-[20%] md:w-[25%] h-[80%] md:h-[100%] p-2 cursor-pointer rounded-2xl bg-gray-200/50`, activeCategory === 'All'? 'bg-maingreen/30': `bg-none`)}>
                     <p className="text-[.8rem] md:text-[1rem]">All</p>
                     <Image src={allItems} alt="All category" width={25} height={25}/>
                 </button>
