@@ -5,7 +5,7 @@ import FwButton from "@/app/ui/FwButton";
 import BwButton from "@/app/ui/BwButton";
 import Image from "next/image";
 
-export async function staticParams(){
+export async function GetParams(){
     //Define the params that are used for Static Path
     try{
         const response = await fetch("/api/products");
@@ -15,8 +15,14 @@ export async function staticParams(){
 
         const products: Products[] = await response.json();
 
+        console.log(products)
+
+        if (!Array.isArray(products)){
+            throw new Error("Products response is not an array")
+        }
+
         return products.map((product) => ({
-            name: product.name
+            name: product.name,
         }))
 
     }catch(error){
@@ -24,8 +30,9 @@ export async function staticParams(){
     }
 }
 
-export default async function Page ({params}: {params: Promise<{name: string}>}){
-    const {name} = await params
+export default async function Page({ params }: {params: {name: string} }){
+
+    const { name } = await params
 
     //Fetch the products data within the Page component
     try{
