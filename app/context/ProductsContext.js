@@ -11,6 +11,7 @@ export function CartProvider ({ children }) {
             const productsInLocalStorage = localStorage.getItem('cartProducts');
             return productsInLocalStorage ? JSON.parse(productsInLocalStorage) : [];
         }catch(error){
+            console.error(error)
             return[];
         }
     });

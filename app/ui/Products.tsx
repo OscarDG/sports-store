@@ -2,7 +2,6 @@
 import { Products } from "../types";
 import { useState } from "react";
 import { useFilter } from "../hooks/useFilter";
-import {useCart} from "../hooks/useProducts";
 import FwButton from "@/app/ui/FwButton";
 import Image from "next/image";
 import clsx from "clsx";
@@ -16,10 +15,6 @@ export default function ProductsSect({products}:headerProducts){
     const [initialProducts] = useState(products)
     const {filterProducts} = useFilter()
     const filteredProducts = filterProducts(initialProducts)
-
-    const {cartItems, addItemsToCart, deleteFromCart, clearCart} = useCart();
-
-    console.log(cartItems)
 
     return (
         <section className="relative flex flex-col justify-center items-center w-[100%] h-auto overscroll-contain">

@@ -1,14 +1,9 @@
 import Lookicon from "@/public/look"
-import {Products} from '@/app/types'
 import { useFilter } from "../hooks/useFilter"
 import { useState } from "react"
 
-type categoriesProducts = {
-    products: Products[],
-    filter?: string
-}
 
-export default function SearchBar({products}:categoriesProducts){
+export default function SearchBar(){
 
     const {setFilters } = useFilter()
 
