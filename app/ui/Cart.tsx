@@ -7,21 +7,21 @@ import BwButton from "@/app/ui/BwButton";
 import Image from "next/image";
 
 type cartProducts = {
-    products: Products[],
-    name: string
+    products: Products[]
+    name: string;
 }
 
-export default function Cart({products, name}:cartProducts) {
+
+export default function Cart({products, name}: cartProducts) {
 
     if (!name) {
         return <div>Product name is not provided</div>;
     }
 
-    //Look for the specific product based on the param given
-    const product = products.find((p) => p.name?.toLocaleLowerCase() === name.toLocaleLowerCase());
+    const product = products.find((product) => product.name.toLowerCase() === name.toLowerCase());
 
-    if(!product){
-        return <div>Product not found</div>;
+    if (!product) {
+        throw new Error("Product not found");
     }
 
     return (

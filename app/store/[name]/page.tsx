@@ -1,7 +1,7 @@
 import { Products } from "@/app/types"
 import Cart from "@/app/ui/Cart"
 
-export async function GetParams(){
+export async function getStaticPaths(){
     //Define the params that are used for Static Path
     try{
         const response = await fetch("/api/products");
@@ -11,26 +11,33 @@ export async function GetParams(){
 
         const products: Products[] = await response.json();
 
-        console.log(products)
-
         if (!Array.isArray(products)){
             throw new Error("Products response is not an array")
         }
 
-        return products.map((product) => ({
-            name: product.name,
-        }))
+        //Generate paths from product names
+        const paths= products.map((product) => ({
+            params: {name: product.name}
+        }));
+
+        return {
+            paths, // Returning all paths for static generation
+            fallback: false // Set to true if you want to enable dynamic routes
+        };
 
     }catch(error){
-        console.error(error)
+        console.error(error);
+        return {
+            paths: [], // Return an empty array if there's an error
+            fallback: false // Set to false to avoid fallback behavior
+        };
     }
 }
 
-export default async function Page({ params }: {params: {name: string} }){
+export default async function Page({params}: {params: {name: string}}){ 
 
-    const { name } = params
+    const { name } = params;
 
-    //Fetch the products data within the Page component
     try{
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`);
         if(!response.ok){
@@ -43,13 +50,12 @@ export default async function Page({ params }: {params: {name: string} }){
             <main>
                 <Cart products={products} name={name}/>
             </main>
-        )
+        );
 
     }catch(error){
         console.error(error)
         return <div>Error loading product details</div>
     }
-  
 }
 
 
