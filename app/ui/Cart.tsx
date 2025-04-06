@@ -1,24 +1,22 @@
 'use client'
-import { Products } from "../types";
 import { monaSans } from "../fonts"
+import { Products } from "@/app/types"
 import clsx from "clsx"
 import FwButton from "@/app/ui/FwButton";
 import BwButton from "@/app/ui/BwButton";
 import Image from "next/image";
 
 type cartProducts = {
-    products: Products[]
-    name: string;
+    product: Products,
+    name: string,
 }
 
 
-export default function Cart({products, name}: cartProducts) {
+export default function Cart({product, name}: cartProducts) {
 
     if (!name) {
         return <div>Product name is not provided</div>;
     }
-
-    const product = products.find((product) => product.name.toLowerCase() === name.toLowerCase());
 
     if (!product) {
         throw new Error("Product not found");
