@@ -22,7 +22,7 @@ export default function ProductsSect({products}:headerProducts){
             {filteredProducts.map((product) => (
                 <div key={product.id} className={`group relative flex flex-col justify-evenly items-center w-[75%] max-w-[300px] md:w-[30%] md:max-w-[400px] min-w-[300px] md:min-w-[400px] h-[60%] max-h-[350px] md:h-[50%] md:max-h-[350px] min-h-[350px] md:min-h-[400px] rounded-2xl bg-gray-200 overflow-hidden`}>
                     <div className="absolute bottom-3 right-8 md:right-5 w-[20%] h-[10%] z-10">
-                        <FwButton width={'50'} height={'100'} href={`store/${encodeURIComponent(product.name)}`} text='Buy it'/>
+                        <FwButton width={'50'} height={'100'} href={`store/${encodeURIComponent(product.name)}`} text='More'/>
                     </div>
                     <Image src={`/${product.tag}.webp`} alt={product.name} width={400} height={500} className="w-[400px] h-[500px] object-cover transition duration-150 group-hover:scale-120" />
                     <div className="absolute top-0 left-0 hidden flex-col justify-center items-center w-full h-full bg-black/50 transition duration-150 group-hover:flex">

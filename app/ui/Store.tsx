@@ -21,9 +21,9 @@ export default function StoreCard() {
         
                     const data: Products[] = await response.json();
     
-                    const avalableProducts = data.filter((product) => product.available === true)
+                    const availableProducts = data.filter((product) => product.available === true)
     
-                    setProducts(avalableProducts);
+                    setProducts(availableProducts);
                 }catch(error){
                     console.error(error)
                     setError(error instanceof Error? error.message : "Unknown error");
