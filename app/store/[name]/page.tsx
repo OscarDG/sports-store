@@ -4,7 +4,7 @@ import Cart from "@/app/ui/Cart"
 export async function generateStaticParams(){
     //Define the params that are used for Static Path
     try{
-        const response = await fetch("/api/products");
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`);
         if(!response.ok){
             throw new Error("Failed to fetch products");
         }
@@ -26,7 +26,8 @@ export async function generateStaticParams(){
     }
 }
 
-export async function generateMetadata({params}: {params: {name: string}}){
+// Fetch product details based on params
+export async function generateMetadata({ params }: { params: {name: string}}){
 
     try{
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`);
@@ -51,9 +52,9 @@ export async function generateMetadata({params}: {params: {name: string}}){
     }
 }
 
-export default async function Page({params}: {params: {name: string}}){ 
+export default async function Page({ params }: {params: {name: string}}){ 
 
-    const { name } = params;
+    const { name } = await params;
 
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/products`);

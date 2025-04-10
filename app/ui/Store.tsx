@@ -1,8 +1,7 @@
 import {useState, useEffect} from "react"
-import {CartProvider} from '@/app/context/ProductsContext'
 import {ProductsSkeleton} from "./Skeletons"
 import { Products } from "@/app/types"
-import StoreHeader from "./StoreHeader"
+import StoreHeader from "@/app/ui/StoreHeader"
 import ProductsSect from "@/app/ui/Products"
 
 export default function StoreCard() {
@@ -45,9 +44,7 @@ export default function StoreCard() {
     return (
         <main>
             <StoreHeader products={products}/>
-            <CartProvider>
-                <ProductsSect products={products} />
-            </CartProvider>
+            <ProductsSect products={products} />
         </main>
     )
 }

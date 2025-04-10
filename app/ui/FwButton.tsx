@@ -4,7 +4,7 @@ import { ArrowIcon } from '@/public/arrow'
 type ButtonProps = {
     width?: number | string,
     height?: number | string,
-    href: string,
+    href: string
     target?: string,
     text: string
     onClick?: () => void
