@@ -5,12 +5,11 @@ type ButtonProps = {
     height?: number | string,
     mdwidth?: number | string,
     mdheight?: number | string,
-    href?: string,
-    target?: string,
+    onClick?: () => void,
 }
 
-export default function CartButton({width, height, mdwidth, mdheight, href, target}: ButtonProps){
+export default function CartButton({width, height, mdwidth, mdheight, onClick}: ButtonProps){
     return (
-        <a href={href} target={target} className={`flex justify-center items-center w-[${width}%] md:w-[${mdwidth}%] h-[${height}%] md:h-[${mdheight}%] cursor-pointer`}><CartIcon width={'100%'} height={'70%'} stroke="#ffffff"/></a>
+        <button onClick={onClick} className={`flex justify-center items-center w-[${width}%] md:w-[${mdwidth}%] h-[${height}%] md:h-[${mdheight}%] cursor-pointer`}><CartIcon width={'100%'} height={'70%'} stroke="#ffffff"/></button>
     )
 }

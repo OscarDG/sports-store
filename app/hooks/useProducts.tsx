@@ -1,13 +1,9 @@
 import {useContext} from 'react';
-import {CartContext} from '@/app/context/ProductsContext';
+import {CartContext} from '@/app/context/CartContext';
 
-export const useCart = () => {
+export function useCart () {
 
-    const context = useContext(CartContext);
-
-    if(context === undefined){
-        throw new Error("useCart must be used within a CartProvider");
-    }
-
-    return context;
+    const {cartItems, setCartItems, totalPrice, setTotalPrice, showCart, setShowCart} = useContext(CartContext)//trae los productos del contexto - consume el contexto
+ 
+    return {cartItems, setCartItems, totalPrice, setTotalPrice, showCart, setShowCart}
 }

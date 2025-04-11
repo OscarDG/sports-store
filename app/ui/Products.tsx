@@ -1,7 +1,8 @@
 'use client';
 import { Products } from "../types";
 import { useState, useEffect } from "react";
-import { useFilter } from "../hooks/useFilter";
+import { useFilter } from "@/app/hooks/useFilter";
+import { useCart } from "@/app/hooks/useProducts";
 import FwButton from "@/app/ui/FwButton";
 import Image from "next/image";
 import clsx from "clsx";
@@ -19,42 +20,33 @@ export default function ProductsSect({products}:headerProducts){
 
     //set the items added and removed from the cart
 
-    const [cartItems, setCartItems] = useState<Products[]>(() => {
+    const { cartItems, setCartItems, totalPrice, setTotalPrice, showCart, setShowCart }: { cartItems: Products[], setCartItems: React.Dispatch<React.SetStateAction<Products[]>>, totalPrice: number, setTotalPrice: React.Dispatch<React.SetStateAction<number>>, showCart: boolean, setShowCart: React.Dispatch<React.SetStateAction<boolean>>} = useCart()
 
-        try{
-            const productsInLocalStorage = localStorage.getItem('cartProducts');
-            return productsInLocalStorage ? JSON.parse(productsInLocalStorage) : [];
-        }catch(error){
-            console.error(error)
-            return[];
-        }
-    });
-
-    const [cartPrice, setCartPrice] = useState<number>(0);
 
     useEffect(() => {
-            localStorage.setItem('cartProducts', JSON.stringify(cartItems));
-        }, [cartItems])
-
-    const [showCart, setShowCart] = useState(true)
-
-        const handleShowCart = () => {
-            setShowCart(!showCart);
-    };
-
+        localStorage.setItem('cartProducts', JSON.stringify(cartItems));
+    }, [cartItems])
 
     const handleAddToCart = (product: Products) => {
-        setCartItems((prevItems) => [...prevItems, product]);
-        setCartPrice((prevPrice) => prevPrice + product.price);
+        setCartItems((prevItems: Products[]) => [...prevItems, product]);
+        setTotalPrice((prevPrice) => prevPrice + product.price);
     };  
 
     const handleRemoveCart = (product: Products) => {
-        setCartItems((prevItems) => prevItems.filter(item => item.id !== product.id));
+        setCartItems((prevItems: Products[]) => prevItems.filter(item => item.id !== product.id));
+        setTotalPrice((prevPrice) => prevPrice - product.price);
     }
 
     const handleClearCart = () => {
         setCartItems([]);
+        setTotalPrice(0);
+        localStorage.removeItem('cartProducts');
     };
+
+    const handleShowCart = () => {
+            setShowCart(!showCart);
+    };
+
 
     return (
         <section className="relative flex flex-col justify-center items-center w-[100%] h-auto overscroll-contain">
@@ -75,14 +67,14 @@ export default function ProductsSect({products}:headerProducts){
                 </div>
             ))}
         </div>
-        <div className={clsx("absolute flex flex-col items-center top-0 right-0 z-20", showCart ? "block" : "hidden")}>
-            <span className="absolute top-3 left-5" onClick={() => handleShowCart()}>X</span>
+        <div className={clsx("absolute flex flex-col items-center -top-10 right-2 z-20", showCart ? "block" : "hidden")}>
+            <span className="absolute top-3 left-5 flex justify-center items-center w-[25px] rounded-[100%] bg-mainred text-mainwhite cursor-pointer" onClick={() => handleShowCart()}>X</span>
             {cartItems.length > 0 ? (
                 <div className="flex flex-col justify-center items-center w-[400px] h-auto gap-2 rounded-2xl bg-gray-200 p-5 shadow-md">
                     <h2 className="text-center text-mainred font-bold">Your cart</h2>
                     {cartItems.map((item, index) => (
                         <div key={index} className="relative flex flex-col justify-evenly w-[80%] h-auto p-2 bg-gray-100 rounded-md shadow-md">
-                            <span className="absolute top-2 right-5" onClick={() => handleRemoveCart(item)}>x</span>
+                            <span className="absolute top-2 right-5 text-maingreen font-bold cursor-pointer" onClick={() => handleRemoveCart(item)}>x</span>
                             <h3 className="text-lg font-semibold">{item.name}</h3>
                             <p className="text-sm text-gray-500">Price: ${item.price} USD</p>
                             <p className="text-sm text-gray-500">Category: {item.category}</p>
@@ -91,7 +83,7 @@ export default function ProductsSect({products}:headerProducts){
                         </div>
                     ))}
                     <h3 className="mb-0 font-bold">Total items: {cartItems.length}</h3>
-                    <h3 className="mb-10 font-bold">Total price: $ {cartPrice}</h3>   
+                    <h3 className="mb-10 font-bold">Total price: $ {totalPrice}</h3>   
                 </div>):(
                 <div className="flex flex-col justify-center items-center w-[400px] h-[200px] gap-2 rounded-2xl bg-gray-200 p-5 shadow-md">
                     <h2 className="text-center text-mainred font-bold">Your cart is empty</h2>

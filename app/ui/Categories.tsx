@@ -25,7 +25,7 @@ export default function Categories({products}:categoriesProducts){
         }
     }
 
-    const {setFilters } = useFilter()
+    const {setFilters} = useFilter()
 
     const [activeCategory, setActiveCategory] = useState<string | null>('all')
 

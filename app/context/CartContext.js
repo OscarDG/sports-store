@@ -1,21 +1,32 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useState } from 'react'
 
 export const CartContext = createContext();
 
-
 export function CartProvider ({ children }) {
 
+    const [cartItems, setCartItems] = useState(() => {
+        try{
+            const productsInLocalStorage = localStorage.getItem('cartProducts');
+            return productsInLocalStorage ? JSON.parse(productsInLocalStorage) : [];
+        }catch(error){
+            console.error(error)
+            return[];
+        }
+    });
 
-const clearCart = () => {
-    setCartItems([]);
-}
+    const [totalPrice, setTotalPrice] = useState(0)
+
+    const [showCart, setShowCart] = useState(true)
 
     return (
         <CartContext.Provider value={{ 
-            cartItems, 
-            addItemsToCart, 
-            deleteFromCart,
-            clearCart}}>
+            cartItems,
+            setCartItems,
+            totalPrice,
+            setTotalPrice,
+            showCart,
+            setShowCart
+            }}>
             {children}
         </CartContext.Provider>
     )

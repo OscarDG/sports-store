@@ -3,6 +3,7 @@ import {ProductsSkeleton} from "./Skeletons"
 import { Products } from "@/app/types"
 import StoreHeader from "@/app/ui/StoreHeader"
 import ProductsSect from "@/app/ui/Products"
+import { CartProvider } from "../context/CartContext"
 
 export default function StoreCard() {
         
@@ -43,8 +44,10 @@ export default function StoreCard() {
 
     return (
         <main>
-            <StoreHeader products={products}/>
-            <ProductsSect products={products} />
+            <CartProvider>
+                <StoreHeader products={products}/>
+                <ProductsSect products={products} />
+            </CartProvider>
         </main>
     )
 }
