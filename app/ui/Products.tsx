@@ -20,7 +20,7 @@ export default function ProductsSect({products}:headerProducts){
 
     //set the items added and removed from the cart
 
-    const { cartItems, setCartItems, totalPrice, setTotalPrice, showCart, setShowCart }: { cartItems: Products[], setCartItems: React.Dispatch<React.SetStateAction<Products[]>>, totalPrice: number, setTotalPrice: React.Dispatch<React.SetStateAction<number>>, showCart: boolean, setShowCart: React.Dispatch<React.SetStateAction<boolean>>} = useCart()
+    const { cartItems, setCartItems, totalPrice, setTotalPrice, showCart, setShowCart }: { cartItems: Products[], setCartItems: React.Dispatch<React.SetStateAction<Products[]>>, totalPrice: number, setTotalPrice: React.Dispatch<React.SetStateAction<number>>, showCart: boolean, setShowCart: React.Dispatch<React.SetStateAction<boolean>> } = useCart();
 
 
     useEffect(() => {
@@ -83,7 +83,7 @@ export default function ProductsSect({products}:headerProducts){
                         </div>
                     ))}
                     <h3 className="mb-0 font-bold">Total items: {cartItems.length}</h3>
-                    <h3 className="mb-10 font-bold">Total price: $ {totalPrice}</h3>   
+                    <h3 className="mb-10 font-bold">Total price: $ {Math.round(totalPrice*100)/100}</h3>   
                 </div>):(
                 <div className="flex flex-col justify-center items-center w-[400px] h-[200px] gap-2 rounded-2xl bg-gray-200 p-5 shadow-md">
                     <h2 className="text-center text-mainred font-bold">Your cart is empty</h2>

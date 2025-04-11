@@ -16,7 +16,7 @@ export function CartProvider ({ children }) {
 
     const [totalPrice, setTotalPrice] = useState(0)
 
-    const [showCart, setShowCart] = useState(true)
+    const [showCart, setShowCart] = useState(false)
 
     return (
         <CartContext.Provider value={{ 
