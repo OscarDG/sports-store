@@ -26,6 +26,7 @@ export default function ProductsSect({products}:headerProducts){
         localStorage.setItem('cartProducts', JSON.stringify(cartItems));
     }, [cartItems])
 
+
     const handleAddToCart = (product: Products) => {
 
         const inCart = cartItems.find(item => item.id === product.id);
@@ -41,8 +42,9 @@ export default function ProductsSect({products}:headerProducts){
         }
 
         setTotalPrice(prev => prev + product.price);
-        setTotalItems(prev => prev + 1);
 
+        setTotalItems(prev => prev + 1);
+ 
     };  
 
     const handleRemoveCart = (product: Products) => {
@@ -76,7 +78,6 @@ export default function ProductsSect({products}:headerProducts){
             setShowCart(!showCart);
     };
 
-
     return (
         <section className="relative flex flex-col justify-center items-center w-[100%] h-auto overscroll-contain">
         <div className="flex md:flex-row flex-col justify-start md:justify-evenly md:items-start items-center md:flex-wrap w-[95%] md:w-[80%] h-auto gap-5 pb-5 pt-10 overflow-y-auto scrollbarhide">
@@ -96,10 +97,10 @@ export default function ProductsSect({products}:headerProducts){
                 </div>
             ))}
         </div>
-        <div className={clsx("absolute flex flex-col items-center -top-5 right-1 z-20", showCart ? "block" : "hidden")}>
-            <span className="absolute top-3 left-10 flex justify-center items-center w-[25px] rounded-[100%] bg-mainred text-mainwhite cursor-pointer" onClick={() => handleShowCart()}>X</span>
+        <div className={clsx("absolute flex flex-col items-center justify-center -top-5 right-9 z-20 w-[80%] md:w-[35%] h-auto min-h-[200px] gap-2 rounded-2xl bg-gray-200 p-5 shadow-md", showCart ? "block" : "hidden")}>
+            <span className="absolute top-3 left-[3%] flex justify-center items-center w-[25px] rounded-[100%] bg-mainred text-mainwhite cursor-pointer" onClick={() => handleShowCart()}>X</span>
             {cartItems.length > 0 ? (
-                <div className="flex flex-col justify-center items-center w-[85%] h-auto gap-2 rounded-2xl bg-gray-200 p-5 shadow-md">
+                <>
                     <h2 className="text-center text-mainred font-bold mb-5">Your cart</h2>
                     {cartItems.map((item, index) => (
                         <div key={index} className="relative flex flex-col justify-evenly gap-1 w-[85%] h-auto bg-gray-100 rounded-md shadow-md p-5 mb-2">
@@ -108,19 +109,20 @@ export default function ProductsSect({products}:headerProducts){
                             <p className="text-sm text-gray-500"><strong>Price:</strong> ${item.price} USD</p>
                             <p className="text-sm text-gray-500"><strong>Category:</strong> {item.category}</p>
                             <p className="text-sm text-gray-500"><strong>Description:</strong> {item.description}</p>
-                            <div className="flex flex-row justify-between items-center w-[30%] h-[30px] mt-2">
-                            <button onClick={() => handleRemoveCart(item)} className="flex justify-center items-center w-[40%] rounded-4xl bg-mainred">-</button>               
-                                <button onClick={() => handleAddToCart(item)} className="flex justify-center items-center w-[40%] rounded-4xl bg-maingreen">+</button>
+                            <div className="flex flex-row justify-between items-center md:w-[30%] w-[50%] h-[30px] mt-2">
+                                <button onClick={() => handleRemoveCart(item)} className="flex justify-center items-center w-[40%] rounded-4xl bg-mainred cursor-pointer">-</button>  
+                                <span className="flex justify-center w-[20px] m-2">{item.amount}</span>             
+                                <button onClick={() => handleAddToCart(item)} className="flex justify-center items-center w-[40%] rounded-4xl bg-maingreen cursor-pointer">+</button>
                             </div>
                         </div>
                     ))}
                     <h3 className="mb-0 font-bold">Total items: {totalItems}</h3>
                     <h3 className="mb-15 font-bold">Total price: ${Math.round(totalPrice*100)/100} USD</h3>   
-                </div>):(
-                <div className="flex flex-col justify-center items-center w-[400px] h-[200px] gap-2 rounded-2xl bg-gray-200 p-5 shadow-md">
+                </>):(
+                    <>
                     <h2 className="text-center text-mainred font-bold">Your cart is empty</h2>
                     <p className="text-sm text-gray-500">Add items to your cart</p>
-                </div>
+                    </>
                  )}
                  <div className="absolute bottom-2 flex flex-row w-[90%] h-[50px] justify-evenly items-center">
                     <button className="w-[100px] h-[30px] bg-mainred text-white rounded-md cursor-pointer" onClick={() => handleClearCart()}>Clear cart</button>
