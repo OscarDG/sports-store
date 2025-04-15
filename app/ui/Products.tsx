@@ -1,5 +1,5 @@
 'use client';
-import { Products } from "../types";
+import { Products } from "@/app/types";
 import { useState, useEffect } from "react";
 import { useFilter } from "@/app/hooks/useFilter";
 import { useCart } from "@/app/hooks/useProducts";
@@ -20,26 +20,55 @@ export default function ProductsSect({products}:headerProducts){
 
     //set the items added and removed from the cart
 
-    const { cartItems, setCartItems, totalPrice, setTotalPrice, showCart, setShowCart }: { cartItems: Products[], setCartItems: React.Dispatch<React.SetStateAction<Products[]>>, totalPrice: number, setTotalPrice: React.Dispatch<React.SetStateAction<number>>, showCart: boolean, setShowCart: React.Dispatch<React.SetStateAction<boolean>> } = useCart();
-
+    const { cartItems, setCartItems, totalItems, setTotalItems, totalPrice, setTotalPrice, showCart, setShowCart }: { cartItems: Products[], setCartItems: React.Dispatch<React.SetStateAction<Products[]>>, totalItems: number, setTotalItems: React.Dispatch<React.SetStateAction<number>>, totalPrice: number, setTotalPrice: React.Dispatch<React.SetStateAction<number>>, showCart: boolean, setShowCart: React.Dispatch<React.SetStateAction<boolean>> } = useCart();
 
     useEffect(() => {
         localStorage.setItem('cartProducts', JSON.stringify(cartItems));
     }, [cartItems])
 
     const handleAddToCart = (product: Products) => {
-        setCartItems((prevItems: Products[]) => [...prevItems, product]);
-        setTotalPrice((prevPrice) => prevPrice + product.price);
+
+        const inCart = cartItems.find(item => item.id === product.id);
+
+        if (inCart) {
+            setCartItems(
+                cartItems.map((item) => 
+                    item.id === product.id ? {...item, amount: item.amount + 1} : item
+                )
+            );
+        }else{
+            setCartItems([...cartItems, {...product, amount: 1}]);
+        }
+
+        setTotalPrice(prev => prev + product.price);
+        setTotalItems(prev => prev + 1);
+
     };  
 
     const handleRemoveCart = (product: Products) => {
-        setCartItems((prevItems: Products[]) => prevItems.filter(item => item.id !== product.id));
-        setTotalPrice((prevPrice) => prevPrice - product.price);
+
+        const inCart = cartItems.find((item) => item.id === product.id);
+
+        if(!inCart) return;
+        
+        if (inCart.amount > 1) {
+            setCartItems(
+                cartItems.map((item) => 
+                    item.id === product.id ? {...item, amount: item.amount - 1} : item
+            )
+        ); 
+        }else{
+            setCartItems(cartItems.filter(item => item.id !== product.id));
+        }
+
+        setTotalPrice(prev => prev - product.price);
+        setTotalItems(prev => prev - 1);
     }
 
     const handleClearCart = () => {
         setCartItems([]);
         setTotalPrice(0);
+        setTotalItems(0);
         localStorage.removeItem('cartProducts');
     };
 
@@ -53,7 +82,7 @@ export default function ProductsSect({products}:headerProducts){
         <div className="flex md:flex-row flex-col justify-start md:justify-evenly md:items-start items-center md:flex-wrap w-[95%] md:w-[80%] h-auto gap-5 pb-5 pt-10 overflow-y-auto scrollbarhide">
             {filteredProducts.map((product) => (
                 <div key={product.id} className={`group relative flex flex-col justify-evenly items-center w-[75%] max-w-[300px] md:w-[30%] md:max-w-[400px] min-w-[300px] md:min-w-[400px] h-[60%] max-h-[350px] md:h-[50%] md:max-h-[350px] min-h-[350px] md:min-h-[400px] rounded-2xl bg-gray-200 overflow-hidden`}>
-                    <div className="absolute bottom-3 right-8 md:right-5 w-[25%] h-[10%] z-10">
+                    <div className="absolute bottom-3 right-8 md:right-5 w-[32%] h-[10%] z-10">
                         <FwButton href={''} onClick={() => handleAddToCart(product)} width={'50'} height={'100'} text='Add item'/>
                     </div>
                     <Image src={`/${product.tag}.webp`} alt={product.name} width={400} height={500} className="w-[400px] h-[500px] object-cover transition duration-150 group-hover:scale-120" />
@@ -67,23 +96,26 @@ export default function ProductsSect({products}:headerProducts){
                 </div>
             ))}
         </div>
-        <div className={clsx("absolute flex flex-col items-center -top-10 right-2 z-20", showCart ? "block" : "hidden")}>
-            <span className="absolute top-3 left-5 flex justify-center items-center w-[25px] rounded-[100%] bg-mainred text-mainwhite cursor-pointer" onClick={() => handleShowCart()}>X</span>
+        <div className={clsx("absolute flex flex-col items-center -top-5 right-1 z-20", showCart ? "block" : "hidden")}>
+            <span className="absolute top-3 left-10 flex justify-center items-center w-[25px] rounded-[100%] bg-mainred text-mainwhite cursor-pointer" onClick={() => handleShowCart()}>X</span>
             {cartItems.length > 0 ? (
-                <div className="flex flex-col justify-center items-center w-[400px] h-auto gap-2 rounded-2xl bg-gray-200 p-5 shadow-md">
-                    <h2 className="text-center text-mainred font-bold">Your cart</h2>
+                <div className="flex flex-col justify-center items-center w-[85%] h-auto gap-2 rounded-2xl bg-gray-200 p-5 shadow-md">
+                    <h2 className="text-center text-mainred font-bold mb-5">Your cart</h2>
                     {cartItems.map((item, index) => (
-                        <div key={index} className="relative flex flex-col justify-evenly w-[80%] h-auto p-2 bg-gray-100 rounded-md shadow-md">
+                        <div key={index} className="relative flex flex-col justify-evenly gap-1 w-[85%] h-auto bg-gray-100 rounded-md shadow-md p-5 mb-2">
                             <span className="absolute top-2 right-5 text-maingreen font-bold cursor-pointer" onClick={() => handleRemoveCart(item)}>x</span>
                             <h3 className="text-lg font-semibold">{item.name}</h3>
-                            <p className="text-sm text-gray-500">Price: ${item.price} USD</p>
-                            <p className="text-sm text-gray-500">Category: {item.category}</p>
-                            <p className="text-sm text-gray-500">Description: {item.description}</p>
-                            <p className="text-sm text-gray-500">Tag: {item.tag}</p>
+                            <p className="text-sm text-gray-500"><strong>Price:</strong> ${item.price} USD</p>
+                            <p className="text-sm text-gray-500"><strong>Category:</strong> {item.category}</p>
+                            <p className="text-sm text-gray-500"><strong>Description:</strong> {item.description}</p>
+                            <div className="flex flex-row justify-between items-center w-[30%] h-[30px] mt-2">
+                            <button onClick={() => handleRemoveCart(item)} className="flex justify-center items-center w-[40%] rounded-4xl bg-mainred">-</button>               
+                                <button onClick={() => handleAddToCart(item)} className="flex justify-center items-center w-[40%] rounded-4xl bg-maingreen">+</button>
+                            </div>
                         </div>
                     ))}
-                    <h3 className="mb-0 font-bold">Total items: {cartItems.length}</h3>
-                    <h3 className="mb-10 font-bold">Total price: $ {Math.round(totalPrice*100)/100}</h3>   
+                    <h3 className="mb-0 font-bold">Total items: {totalItems}</h3>
+                    <h3 className="mb-15 font-bold">Total price: ${Math.round(totalPrice*100)/100} USD</h3>   
                 </div>):(
                 <div className="flex flex-col justify-center items-center w-[400px] h-[200px] gap-2 rounded-2xl bg-gray-200 p-5 shadow-md">
                     <h2 className="text-center text-mainred font-bold">Your cart is empty</h2>

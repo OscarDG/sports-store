@@ -3,7 +3,7 @@ import {ProductsSkeleton} from "./Skeletons"
 import { Products } from "@/app/types"
 import StoreHeader from "@/app/ui/StoreHeader"
 import ProductsSect from "@/app/ui/Products"
-import { CartProvider } from "../context/CartContext"
+import { CartProvider } from "@/app/context/CartContext"
 
 export default function StoreCard() {
         
