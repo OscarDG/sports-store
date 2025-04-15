@@ -14,7 +14,7 @@ type headerProducts = {
 
 export default function StoreHeader({products}:headerProducts){
 
-    const {cartItems, totalItems, showCart, setShowCart}: {cartItems: Products[], totalItems: number, showCart: boolean, setShowCart: React.Dispatch<React.SetStateAction<boolean>>} = useCart()
+    const {totalItems, showCart, setShowCart}: {totalItems: number, showCart: boolean, setShowCart: React.Dispatch<React.SetStateAction<boolean>>} = useCart()
 
     const handleShowCart = () => {
         setShowCart(!showCart);
