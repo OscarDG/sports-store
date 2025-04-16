@@ -22,8 +22,7 @@ export default function CheckOut(){
             }, 0)
 
             setTotalPrice(total)
-
-    }, [cartItems])
+    }, [cartItems, setTotalPrice])
 
     return(
         <>
