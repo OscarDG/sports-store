@@ -13,7 +13,7 @@ export default function CheckOut(){
     const [shipping, setShipping] = useState<number>(0)
 
     const handleShipping = () => {
-        shipping === 0 ? setShipping(10) : setShipping(0)
+        setShipping(prev => (prev === 0 ? 10 : 0));
     }
 
     useEffect(() => {
