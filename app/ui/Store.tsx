@@ -4,6 +4,7 @@ import { Products } from "@/app/types"
 import StoreHeader from "@/app/ui/StoreHeader"
 import ProductsSect from "@/app/ui/Products"
 import { CartProvider } from "@/app/context/CartContext"
+import CheckOut from "./Checkout"
 
 export default function StoreCard() {
         

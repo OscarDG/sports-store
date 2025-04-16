@@ -6,6 +6,7 @@ import { useCart } from "@/app/hooks/useProducts";
 import FwButton from "@/app/ui/FwButton";
 import Image from "next/image";
 import clsx from "clsx";
+import Link from "next/link";
 
 type headerProducts = {
     products: Products[]
@@ -18,14 +19,16 @@ export default function ProductsSect({products}:headerProducts){
     const {filterProducts} = useFilter()
     const filteredProducts = filterProducts(initialProducts)
 
-    //set the items added and removed from the cart
-
     const { cartItems, setCartItems, totalItems, setTotalItems, totalPrice, setTotalPrice, showCart, setShowCart }: { cartItems: Products[], setCartItems: React.Dispatch<React.SetStateAction<Products[]>>, totalItems: number, setTotalItems: React.Dispatch<React.SetStateAction<number>>, totalPrice: number, setTotalPrice: React.Dispatch<React.SetStateAction<number>>, showCart: boolean, setShowCart: React.Dispatch<React.SetStateAction<boolean>> } = useCart();
 
     useEffect(() => {
         localStorage.setItem('cartProducts', JSON.stringify(cartItems));
-    }, [cartItems])
+        localStorage.setItem('totalItems', totalItems.toString());
+        localStorage.setItem('totalPrice', totalPrice.toString());
 
+    }, [cartItems, totalItems, totalPrice])
+
+    console.log(localStorage)
 
     const handleAddToCart = (product: Products) => {
 
@@ -41,10 +44,10 @@ export default function ProductsSect({products}:headerProducts){
             setCartItems([...cartItems, {...product, amount: 1}]);
         }
 
-        setTotalPrice(prev => prev + product.price);
+        setTotalPrice((prev) => prev + product.price);
 
         setTotalItems(prev => prev + 1);
- 
+
     };  
 
     const handleRemoveCart = (product: Products) => {
@@ -79,7 +82,7 @@ export default function ProductsSect({products}:headerProducts){
     };
 
     return (
-        <section className="relative flex flex-col justify-center items-center w-[100%] h-auto overscroll-contain">
+        <section className="relative flex flex-col justify-center items-center w-[100%] h-auto overscroll-contain bg-mainwhite">
         <div className="flex md:flex-row flex-col justify-start md:justify-evenly md:items-start items-center md:flex-wrap w-[95%] md:w-[80%] h-auto gap-5 pb-5 pt-10 overflow-y-auto scrollbarhide">
             {filteredProducts.map((product) => (
                 <div key={product.id} className={`group relative flex flex-col justify-evenly items-center w-[75%] max-w-[300px] md:w-[30%] md:max-w-[400px] min-w-[300px] md:min-w-[400px] h-[60%] max-h-[350px] md:h-[50%] md:max-h-[350px] min-h-[350px] md:min-h-[400px] rounded-2xl bg-gray-200 overflow-hidden`}>
@@ -128,7 +131,7 @@ export default function ProductsSect({products}:headerProducts){
                     <button className="w-[100px] h-[30px] bg-mainred text-white rounded-md cursor-pointer" onClick={() => handleClearCart()}>Clear cart</button>
                     {cartItems.length > 0 && 
                     (
-                        <button className="w-[100px] h-[30px] bg-mainred text-white rounded-md cursor-pointer" onClick={() => handleShowCart()}>Checkout</button>
+                        <Link href="/store/checkout" className="flex flex-row justify-center items-center w-[100px] h-[30px] bg-mainred text-white rounded-md cursor-pointer">Checkout</Link>
                     )}
                  </div>
         </div>

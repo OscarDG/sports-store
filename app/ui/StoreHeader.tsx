@@ -21,7 +21,7 @@ export default function StoreHeader({products}:headerProducts){
 };
 
     return (
-        <header className={clsx(`${monaSans.className} relative flex flex-col items-center w-[100%] h-[40vh] md:h-[25vh] pt-5 shadow-sm`)}>
+        <header className={clsx(`${monaSans.className} relative flex flex-col items-center w-[100%] h-[40vh] md:h-[26vh] pt-4 pb-5 bg-gray-100`)}>
             <nav className="header_navbar flex flex-col md:flex-row justify-center md:justify-between items-center w-[95%] h-[35%] md:h-[50%] p-2">
                 <div className="header_buttons absolute top-5 md:top-7 md:right-15 flex flex-row items-center w-[80%] md:w-[20%] h-[25%] md:h-[32%]">
                     <div className="absolute left-0 flex flex-col justify-center items-center w-[35%] h-[70%]">
