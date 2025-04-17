@@ -100,7 +100,7 @@ export default function ProductsSect({products}:headerProducts){
                 </div>
             ))}
         </div>
-        <div className={clsx("absolute flex flex-col items-center justify-center -top-5 right-9 z-20 w-[80%] md:w-[35%] h-auto min-h-[200px] gap-2 rounded-2xl bg-gray-200 p-5 shadow-md", showCart ? "block" : "hidden")}>
+        <div className={clsx("absolute flex flex-col items-center justify-center -top-0 md:right-10 z-20 w-[90%] md:w-[40%] h-auto min-h-[200px] max-w-[450px] gap-2 rounded-2xl bg-gray-200 p-5 shadow-md", showCart ? "block" : "hidden")}>
             <span className="absolute top-3 left-[3%] flex justify-center items-center w-[25px] rounded-[100%] bg-mainred text-mainwhite cursor-pointer" onClick={() => handleShowCart()}>X</span>
             {cartItems.length > 0 ? (
                 <>

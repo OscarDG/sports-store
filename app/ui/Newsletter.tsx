@@ -10,7 +10,6 @@ export default function Newsletter(){
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
     
         try{
 
@@ -39,10 +38,10 @@ export default function Newsletter(){
     };
 
     return(
-            <form onSubmit={handleSubmit} className="flex flex-col justify-evenly items-left w-[70%] md:w-[30%] h-[70%] pl-5">
+            <form onSubmit={handleSubmit} className="flex flex-col justify-evenly items-left w-[70%] md:w-[30%] h-[65%] md:h-[70%] pl-5 md:mb-5">
                 <h3 className={`${monaSans.className} w-[60%] h-auto text-[1.3rem] md:text-[1.5rem] font-medium`}>Subscribe to our newsletter</h3>
-                <input className='w-[90%] h-[18%] pl-[5%] border-1 border-black rounded-sm focus:border-mainred focus:outline-none' type="email" name='email' autoComplete="on" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-                <button name='newsletter' type='submit' className='w-[40%] h-[20%] md:h-[15%] text-mainwhite bg-mainred rounded-sm cursor-pointer'>Subscribe</button>
+                <input className='w-[90%] h-[15%] pl-[5%] border-1 border-black rounded-sm focus:border-mainred focus:outline-none' type="email" name='email' autoComplete="on" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                <button name='newsletter' type='submit' className='w-[50%] md:w-[30%] h-[18%] text-mainwhite bg-mainred rounded-sm cursor-pointer'>Subscribe</button>
                 {message && <p className={clsx(`flex flex-col justify-center w-[50%] h-[10%] text-sm mt-2 text-mainwhite text-center`, message.includes('successful!')? 'bg-maingreen': 'bg-mainred', `rounded-3xl`)}>{message}</p>}
             </form>
     )
