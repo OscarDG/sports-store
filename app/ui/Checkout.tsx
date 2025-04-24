@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import BwButton from "./BwButton";
-import { stringify } from "querystring";
 
 
 export default function CheckOut(){
