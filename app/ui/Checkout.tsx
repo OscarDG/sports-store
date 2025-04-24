@@ -1,8 +1,10 @@
 import { Products } from "@/app/types";
 import { useCart } from "@/app/hooks/useProducts";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import BwButton from "./BwButton";
+import { stringify } from "querystring";
 
 
 export default function CheckOut(){
@@ -13,6 +15,9 @@ export default function CheckOut(){
     const [shipping, setShipping] = useState<number>(0)
 
     const [city, setCity] = useState<string>("")
+    const [address, setAddress] = useState<string>("")
+    const [name, setName] = useState<string>("")
+    const [itemsList, setItemsList] = useState<string[]>([])
 
     useEffect (() => {
         if(city === 'bogota'){
@@ -28,7 +33,16 @@ export default function CheckOut(){
             }, 0)
 
             setTotalPrice(total)
+
+            const list = cartItems.map(item => item.name)
+
+            setItemsList(list)
+
     }, [cartItems, setTotalPrice])
+
+
+    const text = encodeURIComponent(`Hola, mi nombre es ${name} me gustaría comprar los siguientes productos: ${itemsList}. Mi dirección de envío es: ${address} (${city}). Compra total: $${totalPrice} + Envío: $${shipping}`)
+    const whatsAppText = `https://wa.me/573174048898?text=${text}`
 
     return(
         <>
@@ -37,7 +51,7 @@ export default function CheckOut(){
                 <p className="font-bold text-gray-800">Shipping Info</p>
                 <div className="flex flex-row justify-evenly items-center w-[90%] h-auto gap-2 border-b-1 border-gray-200">
                     <p className="w-[20%]">Names:</p>
-                    <input type="text" placeholder="Name and last name" required className="w-[60%] h-[30px] text-gray-500"></input>
+                    <input type="text" placeholder="Name and last name" required value={name} onChange={(e) => setName(e.target.value)} className="w-[60%] h-[30px] text-gray-500"></input>
                 </div>
                 <div className="flex flex-row justify-evenly items-center w-[90%] h-auto gap-2 border-b-1 border-gray-200">
                     <p className="w-[20%]">Email:</p>
@@ -45,7 +59,7 @@ export default function CheckOut(){
                 </div>
                 <div className="flex flex-row justify-evenly items-center w-[90%] h-auto gap-2 border-b-1 border-gray-200">
                     <p className="w-[20%]">Shipping address:</p>
-                    <input type="text" placeholder="Address" required className="w-[60%] h-[30px] text-gray-500"></input>
+                    <input type="text" placeholder="Address" required value={address} onChange={(e) => setAddress(e.target.value)} className="w-[60%] h-[30px] text-gray-500"></input>
                 </div>
                 <div className="flex flex-row justify-evenly items-center w-[90%] h-auto gap-2">
                     <p className="w-[20%]">City:</p>
@@ -61,7 +75,7 @@ export default function CheckOut(){
             </div>
             <div className="absolute bottom-[10%] flex flex-row justify-around w-[80%] md:w-[55%] h-[45px]">
                 <BwButton width={40} height={100} href="/store" text="Back to store"></BwButton>
-                <button className="w-[40%] h-[100%] bg-maingreen text-white cursor-pointer">Pay</button>
+                <Link href={whatsAppText} target="_blank" className="flex justify-center items-center w-[40%] h-[100%] bg-maingreen text-white cursor-pointer">Purchase</Link>
             </div>
         </div>
         {cartItems.length > 0 ? (
@@ -69,9 +83,9 @@ export default function CheckOut(){
             <div className="flex flex-col justify-evenly w-[100%] h-[90%] md:h-auto mb-5 md:border-b-1 md:border-gray-300">
                 {cartItems.map((product) => (
                     <div key={product.id} className="flex flex-row items-center justify-around w-[100%] h-auto gap-2 mb-5">
-                        <div className="relative flex justify-center w-[15%] h-[100%]">
-                            <Image className= "w-[60px] md:w-[80px] h-[60px] md:h-[80px] rounded-[100%] object-cover" src={`/${product.tag}.webp`} alt={product.name} width={500} height={500}/>
-                            <span className="absolute -top-1 right-2 flex justify-center items-center w-[20px] h-[20px] rounded-2xl bg-mainred text-mainwhite">{product.amount}</span>   
+                        <div className="relative flex justify-center w-[15%] max-w-[60px] md:max-w-[90px] h-[100%]">
+                            <Image className= "w-[60px] md:w-[80px] max-w-[80px] h-[60px] md:h-[80px] max-h-[80px] rounded-[100%] object-cover" src={`/${product.tag}.webp`} alt={product.name} width={500} height={500}/>
+                            <span className="absolute -top-1 -right-0 md:right-3 flex justify-center items-center w-[20px] h-[20px] rounded-2xl bg-mainred text-mainwhite">{product.amount}</span>   
                         </div>
                         <h1 className="w-[30%] text-center"><strong>{product.name}</strong></h1>
                         <p className="w-[20%]"><strong>${product.amount * product.price}</strong></p>
@@ -82,7 +96,7 @@ export default function CheckOut(){
                 <div className="flex flex-col gap-2">
                     <p><strong>Subtotal:</strong> ${Math.round(totalPrice*100)/100}</p>
                     <p><strong>Shipping:</strong> {shipping === 0 ? 'Free' : `$${shipping}`}</p>
-                    <h2><strong className="text-mainred">Total:</strong> ${Math.round((totalPrice+ shipping)*100)/100}</h2>
+                    <h2><strong className="text-mainred">Total:</strong> ${Math.round((totalPrice + shipping)*100)/100}</h2>
                 </div>
                 <span className="mt-5 text-[0.7rem]">* The shipping is free for addresses in Bogotá.</span>
             </div>
